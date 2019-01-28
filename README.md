@@ -69,7 +69,7 @@ Try it here: https://b.bitdb.network
 
 Let's upload an image. 
 
-You can try it [here](https://b.bitdb.netwoork) (up to 100KB)
+You can try it [here](https://b.bitdb.network) (up to 100KB)
 
 When you select a file, it **directly writes the binary (ArrayBuffer)** into Bitcoin pushdata (instead of base64 string). The resulting OP_RETURN would look something like this:
 
