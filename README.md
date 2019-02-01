@@ -84,6 +84,12 @@ By default, the encoding is `binary`, so you could just do (if you don't care ab
 OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png
 ```
 
+Another example:
+
+```
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  text/html  UTF-8  index.html
+```
+
 <br>
 
 ## 2. Referencing Media
