@@ -16,7 +16,7 @@ B is an OP_RETURN protocol to **store** and **reference** arbitrary data on Bitc
 
 The design goal:
 
-1. The simplest protocol to upload arbitrary media too the blockchain
+1. The simplest protocol to upload arbitrary media to the blockchain
 2. A protocol to **reference** previously uploaded media from another **on-chain media**.
 
 <br>
@@ -28,7 +28,12 @@ The design goal:
 Here's an example of what **POST transactions** look like:
 
 ```
-OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [Data] [Media Type] [Encoding]
+OP_RETURN
+  19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut
+  [Data]
+  [Media Type]
+  [Encoding]
+  [Filename]
 ```
 
 The order is deliberately `data`, `media type`, and `encoding`, `filename`, in the order of significance (With future extensibility through adding additional push data).
