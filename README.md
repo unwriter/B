@@ -31,17 +31,18 @@ Here's an example of what **POST transactions** look like:
 OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [Data] [Media Type] [Encoding]
 ```
 
-The order is deliberately `data`, `media type`, and `encoding`, in the order of significance (With future extensibility through adding additional push data).
+The order is deliberately `data`, `media type`, and `encoding`, `filename`, in the order of significance (With future extensibility through adding additional push data).
 
 
 1. **Data:** data to store
 2. **Media Type:** As listed at https://www.iana.org/assignments/media-types/media-types.xhtml
 3. **Encoding:** As listed at https://www.iana.org/assignments/character-sets/character-sets.xhtml
+4. **Filename:** a filename to store the blob as
 
 Example: HTML
 
 ```
-OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut  <html><body>hello world</body></html>  text/html  UTF-8
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut  <html><body>hello world</body></html>  text/html  UTF-8  hello.html
 ```
 
 <br>
@@ -75,7 +76,7 @@ When you select a file, it **directly writes the binary (ArrayBuffer)** into Bit
 
 
 ```
-OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  binary
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  binary  duck.png
 ```
 
 Or you could just do:
@@ -85,6 +86,12 @@ OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/
 ```
 
 Because by default it will be recognized as `binary` type.
+
+Since the default is `binary`, if you want to store a file with a filename, you can also simply use an empty third pushdata to indicate the default `binary` type (However you can't just skip the empty pushdata, it MUST exist as an empty pushdata):
+
+```
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  ''  duck.png
+```
 
 <br>
 
@@ -110,6 +117,7 @@ OP_RETURN
 <html><body><img src="b://46e1ca555622e73708a065f92df0af2cc0fe00ed1dd352d5fb8510365050347c"></body></html>
 text/html
 UTF-8 
+example.html
 ```
 
 Once this HTML file is uploaded to Bitcoin, and the tx hash is `e2be88f33d98074f778ddd94c13fe500cb1f5a4dfb3ed958391c95f431c20549`, you can link it from another HTML, like this:
@@ -139,5 +147,6 @@ OP_RETURN
 [Here](b://e2be88f33d98074f778ddd94c13fe500cb1f5a4dfb3ed958391c95f431c20549) is a website, which contains the following image:\n![image](b://46e1ca555622e73708a065f92df0af2cc0fe00ed1dd352d5fb8510365050347c)
 text/markdown
 UTF-8 
+README.md
 ```
 
