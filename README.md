@@ -31,17 +31,18 @@ Here's an example of what **POST transactions** look like:
 OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [Data] [Media Type] [Encoding]
 ```
 
-The order is deliberately `data`, `media type`, and `encoding`, in the order of significance (With future extensibility through adding additional push data).
+The order is deliberately `data`, `media type`, and `encoding`, `filename`, in the order of significance (With future extensibility through adding additional push data).
 
 
 1. **Data:** data to store
 2. **Media Type:** As listed at https://www.iana.org/assignments/media-types/media-types.xhtml
-3. **Encoding:** As listed at https://www.iana.org/assignments/character-sets/character-sets.xhtml
+3. **Encoding:** As listed at https://www.iana.org/assignments/character-sets/character-sets.xhtml (The default is `binary`)
+4. **Filename:** a filename to store the blob as (the default has no filename and just stored as a blob, identified simply by the txid)
 
 Example: HTML
 
 ```
-OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut  <html><body>hello world</body></html>  text/html  UTF-8
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut  <html><body>hello world</body></html>  text/html  UTF-8  hello.html
 ```
 
 <br>
@@ -73,18 +74,21 @@ You can try it [here](https://b.bitdb.network) (up to 100KB)
 
 When you select a file, it **directly writes the binary (ArrayBuffer)** into Bitcoin pushdata (instead of base64 string). The resulting OP_RETURN would look something like this:
 
-
 ```
-OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  binary
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  binary  duck.png
 ```
 
-Or you could just do:
+By default, the encoding is `binary`, so you could just do (if you don't care about file names):
 
 ```
 OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png
 ```
 
-Because by default it will be recognized as `binary` type.
+Another example:
+
+```
+OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  text/html  UTF-8  index.html
+```
 
 <br>
 
@@ -110,6 +114,7 @@ OP_RETURN
 <html><body><img src="b://46e1ca555622e73708a065f92df0af2cc0fe00ed1dd352d5fb8510365050347c"></body></html>
 text/html
 UTF-8 
+example.html
 ```
 
 Once this HTML file is uploaded to Bitcoin, and the tx hash is `e2be88f33d98074f778ddd94c13fe500cb1f5a4dfb3ed958391c95f431c20549`, you can link it from another HTML, like this:
@@ -139,5 +144,6 @@ OP_RETURN
 [Here](b://e2be88f33d98074f778ddd94c13fe500cb1f5a4dfb3ed958391c95f431c20549) is a website, which contains the following image:\n![image](b://46e1ca555622e73708a065f92df0af2cc0fe00ed1dd352d5fb8510365050347c)
 text/markdown
 UTF-8 
+README.md
 ```
 
