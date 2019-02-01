@@ -36,8 +36,8 @@ The order is deliberately `data`, `media type`, and `encoding`, `filename`, in t
 
 1. **Data:** data to store
 2. **Media Type:** As listed at https://www.iana.org/assignments/media-types/media-types.xhtml
-3. **Encoding:** As listed at https://www.iana.org/assignments/character-sets/character-sets.xhtml
-4. **Filename:** a filename to store the blob as
+3. **Encoding:** As listed at https://www.iana.org/assignments/character-sets/character-sets.xhtml (The default is `binary`)
+4. **Filename:** a filename to store the blob as (the default has no filename and just stored as a blob, identified simply by the txid)
 
 Example: HTML
 
@@ -74,23 +74,14 @@ You can try it [here](https://b.bitdb.network) (up to 100KB)
 
 When you select a file, it **directly writes the binary (ArrayBuffer)** into Bitcoin pushdata (instead of base64 string). The resulting OP_RETURN would look something like this:
 
-
 ```
 OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  binary  duck.png
 ```
 
-Or you could just do:
+By default, the encoding is `binary`, so you could just do (if you don't care about file names):
 
 ```
 OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png
-```
-
-Because by default it will be recognized as `binary` type.
-
-Since the default is `binary`, if you want to store a file with a filename, you can also simply use an empty third pushdata to indicate the default `binary` type (However you can't just skip the empty pushdata, it MUST exist as an empty pushdata):
-
-```
-OP_RETURN 19HxigV4QyBv3tHpQVcUEQyq1pzZVdoAut [ArrayBuffer from the file]  image/png  ''  duck.png
 ```
 
 <br>
