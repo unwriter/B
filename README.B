@@ -2,13 +2,11 @@
 
 > Bitcoin Data Protocol
 
-[b://6c784b78cff5ee4f469f783adc0e957265f467d3a0dae2b2b1ecbc84a1bd1fb6](b://6c784b78cff5ee4f469f783adc0e957265f467d3a0dae2b2b1ecbc84a1bd1fb6)
-
 Store and reference data on the Bitcoin blockchain.
 
-![store](store.png)
+![store](b://ce41326c049b216a3ecb3f2609285ced59da9a3cdf6f03c6c0abcc2864d99c06)
 
-![reference](reference.png)
+![reference](b://dcdee6a626595bcd6ad2134274acf58c13f398dcc16c35f73d54b42e09fb711c)
 
 <br>
 
